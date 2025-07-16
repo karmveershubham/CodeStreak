@@ -1,7 +1,12 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import React, { useEffect, useRef, useState } from "react";
+import { cn } from "../../lib/utils";
+import React, {
+  ComponentPropsWithoutRef,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 interface MousePosition {
   x: number;
@@ -29,7 +34,7 @@ function MousePosition(): MousePosition {
   return mousePosition;
 }
 
-interface ParticlesProps {
+interface ParticlesProps extends ComponentPropsWithoutRef<"div"> {
   className?: string;
   quantity?: number;
   staticity?: number;
@@ -40,6 +45,7 @@ interface ParticlesProps {
   vx?: number;
   vy?: number;
 }
+
 function hexToRgb(hex: string): number[] {
   hex = hex.replace("#", "");
 
@@ -57,7 +63,20 @@ function hexToRgb(hex: string): number[] {
   return [red, green, blue];
 }
 
-const Particles: React.FC<ParticlesProps> = ({
+type Circle = {
+  x: number;
+  y: number;
+  translateX: number;
+  translateY: number;
+  size: number;
+  alpha: number;
+  targetAlpha: number;
+  dx: number;
+  dy: number;
+  magnetism: number;
+};
+
+export const Particles: React.FC<ParticlesProps> = ({
   className = "",
   quantity = 100,
   staticity = 50,
@@ -67,6 +86,7 @@ const Particles: React.FC<ParticlesProps> = ({
   color = "#ffffff",
   vx = 0,
   vy = 0,
+  ...props
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const canvasContainerRef = useRef<HTMLDivElement>(null);
@@ -76,6 +96,8 @@ const Particles: React.FC<ParticlesProps> = ({
   const mouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const canvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
   const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1;
+  const rafID = useRef<number | null>(null);
+  const resizeTimeout = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (canvasRef.current) {
@@ -83,10 +105,26 @@ const Particles: React.FC<ParticlesProps> = ({
     }
     initCanvas();
     animate();
-    window.addEventListener("resize", initCanvas);
+
+    const handleResize = () => {
+      if (resizeTimeout.current) {
+        clearTimeout(resizeTimeout.current);
+      }
+      resizeTimeout.current = setTimeout(() => {
+        initCanvas();
+      }, 200);
+    };
+
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener("resize", initCanvas);
+      if (rafID.current != null) {
+        window.cancelAnimationFrame(rafID.current);
+      }
+      if (resizeTimeout.current) {
+        clearTimeout(resizeTimeout.current);
+      }
+      window.removeEventListener("resize", handleResize);
     };
   }, [color]);
 
@@ -117,29 +155,23 @@ const Particles: React.FC<ParticlesProps> = ({
     }
   };
 
-  type Circle = {
-    x: number;
-    y: number;
-    translateX: number;
-    translateY: number;
-    size: number;
-    alpha: number;
-    targetAlpha: number;
-    dx: number;
-    dy: number;
-    magnetism: number;
-  };
-
   const resizeCanvas = () => {
     if (canvasContainerRef.current && canvasRef.current && context.current) {
-      circles.current.length = 0;
       canvasSize.current.w = canvasContainerRef.current.offsetWidth;
       canvasSize.current.h = canvasContainerRef.current.offsetHeight;
+
       canvasRef.current.width = canvasSize.current.w * dpr;
       canvasRef.current.height = canvasSize.current.h * dpr;
       canvasRef.current.style.width = `${canvasSize.current.w}px`;
       canvasRef.current.style.height = `${canvasSize.current.h}px`;
       context.current.scale(dpr, dpr);
+
+      // Clear existing particles and create new ones with exact quantity
+      circles.current = [];
+      for (let i = 0; i < quantity; i++) {
+        const circle = circleParams();
+        drawCircle(circle);
+      }
     }
   };
 
@@ -148,7 +180,7 @@ const Particles: React.FC<ParticlesProps> = ({
     const y = Math.floor(Math.random() * canvasSize.current.h);
     const translateX = 0;
     const translateY = 0;
-    const pSize = Math.floor(Math.random() * 3) + size;
+    const pSize = Math.floor(Math.random() * 2) + size;
     const alpha = 0;
     const targetAlpha = parseFloat((Math.random() * 0.6 + 0.1).toFixed(1));
     const dx = (Math.random() - 0.5) * 0.1;
@@ -263,10 +295,9 @@ const Particles: React.FC<ParticlesProps> = ({
         // create a new circle
         const newCircle = circleParams();
         drawCircle(newCircle);
-        // update the circle position
       }
     });
-    window.requestAnimationFrame(animate);
+    rafID.current = window.requestAnimationFrame(animate);
   };
 
   return (
@@ -274,10 +305,9 @@ const Particles: React.FC<ParticlesProps> = ({
       className={cn("pointer-events-none", className)}
       ref={canvasContainerRef}
       aria-hidden="true"
+      {...props}
     >
       <canvas ref={canvasRef} className="size-full" />
     </div>
   );
 };
-
-export default Particles;

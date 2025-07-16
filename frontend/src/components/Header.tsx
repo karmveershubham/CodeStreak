@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import logo from "@/../../public/images/codestreaklogo.webp"
-import { RainbowButton } from "@/components/ui/rainbow-button";
+import { RainbowButton } from "@/components/magicui/rainbow-button";
 
 const Header = () => {
   return (

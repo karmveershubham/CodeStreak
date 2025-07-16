@@ -5,7 +5,7 @@ import Main from '@/components/Main';
 
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
-import Particles from "@/components/ui/particles";
+import {Particles} from "@/components/magicui/particles";
 
 const LandingPage = () => {
   const { theme } = useTheme();

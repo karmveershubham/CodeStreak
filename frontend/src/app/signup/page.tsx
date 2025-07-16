@@ -16,7 +16,9 @@ export default function SignupPage() {
       await account.create('unique()', email, password);
       alert('Account created successfully');
       router.push('/login');  // Redirect to login page after signup
-    } catch (error: any) { // Using 'any' to access 'message' property
+    } 
+    
+    catch (error: any) { // Using 'any' to access 'message' property
       console.error('Signup error:', error.message);
       alert('Signup failed');
     }
