@@ -1,6 +1,6 @@
 # ⚡ Codestreak — AI-Powered Daily Coding Companion
 
-Codestreak is an AI-driven platform that helps coders stay consistent, sharp, and motivated by delivering personalized daily coding challenges via **WhatsApp, Email, or SMS**. Whether you're preparing for interviews or leveling up your competitive programming game, Codestreak ensures you **never break your streak**.
+Codestreak is an AI-driven platform that helps coders stay consistent, sharp, and motivated by delivering personalized daily coding challenges via **WhatsApp, Email, or SMS**. Whether you're preparing for interviews or leveling up your competitive programming game, Codestreak ensures you **never break your streak**.  hi
 
 ---
 
