@@ -6,7 +6,7 @@ Codestreak is an AI-driven platform that helps coders stay consistent, sharp, an
 
 ## 🚀 Features
 
-### ✅ AI-Curated Learning Path
+### ✅ AI-Curated Learning Path : 
 - Users choose a goal (e.g., "Crack Amazon Interviews")
 - Codestreak generates a personalized weekly plan using **GPT-4**
 - Questions include topic, difficulty, and platform links (LeetCode, GFG, Codeforces)
