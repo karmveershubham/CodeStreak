@@ -20,6 +20,10 @@ Codestreak is an AI-driven platform that helps coders stay consistent, sharp, an
 - Automatically notifies users 1 hour before coding contests
 - Supports **Codeforces**, **LeetCode**, and more
 
+### 🧑‍🤝‍🧑 Custom Room Battles
+- Create or join rooms to compete with friends or college mates
+- Compete on selected topics and compare results
+
 ### 🏫 College Leaderboards
 - Track top performers from your college
 - View streaks, total problems solved, and competition wins
@@ -159,17 +163,37 @@ cd codestreak
 
 #### 📦 `backend/.env`
 ```env
-MONGO_URI=your_mongodb_uri
-OPENAI_API_KEY=your_openai_key
+# Server
+PORT=5000
+
+# Database
+DATABASE_URL=mongodb+srv://username:password@cluster0.mongodb.net/codestreak
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USER=example@gmail.com
+EMAIL_PASS=your_email_app_password
+EMAIL_FROM="CodeStreak <no-reply@codestreak.com>"
+
+# JWT
+JWT_ACCESS_TOKEN_SECRET_KEY=your_access_secret
+JWT_REFRESH_TOKEN_SECRET_KEY=your_refresh_secret
+SALT=10
+
+# Frontend
+FRONTEND_HOST=http://localhost:3000
+
+# Google OAuth
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+
+# Twilio
 TWILIO_SID=your_twilio_sid
-TWILIO_AUTH=your_twilio_token
+TWILIO_AUTH=your_twilio_auth_token
 ```
 
 #### 🌐 `frontend/.env.local`
 ```env
-NEXTAUTH_URL=http://localhost:3000
-NEXTAUTH_SECRET=your_secret
-BACKEND_URL=http://localhost:5000
+NEXT_PUBLIC_API_URL=http://localhost:8080  
 ```
 
 ### 3. Run Backend
@@ -183,7 +207,7 @@ npm run dev
 ```bash
 cd frontend
 npm install
-npm run dev
+npm start
 ```
 
 ---
@@ -197,7 +221,9 @@ npm run dev
 
 ---
 
-## 🙌 Contributors
+## 🙌 Mentor
+Feel free to connect for the help
+[Uma Mahesh](https://www.linkedin.com/in/naga-uma-mahesh-nandi-1b4a83360/)
 
 ---
 

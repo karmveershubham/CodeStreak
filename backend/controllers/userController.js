@@ -76,7 +76,7 @@ class UserController {
       }
 
       // Check if there is a matching email verification OTP
-      const emailVerification = await EmailVerificationModel.findOne({ userId: existingUser._id, otp });
+      const emailVerification = await EmailVerificationModel.findOne({ userId: existingUser._id, otp});
       if (!emailVerification) {
         if (!existingUser.is_verified) {
           // console.log(existingUser);
