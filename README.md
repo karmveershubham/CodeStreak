@@ -223,7 +223,7 @@ npm start
 
 ## 🙌 Mentor
 Feel free to connect for the help
-[Uma Mahesh](https://www.linkedin.com/in/naga-uma-mahesh-nandi-1b4a83360/)
+[Uma Mahesh](https://github.com/nagaumamahesh)
 
 ---
 
@@ -235,6 +235,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 💬 Feedback & Suggestions
 
-Feel free to [open an issue](https://github.com/your-username/codestreak/issues) or reach out via [email](mailto:skarmveer1201@gmail.com).
+Feel free to [open an issue](https://github.com/karmveershubham/codestreak/issues) or reach out via [email](mailto:skarmveer1201@gmail.com).
 
 > Stay consistent. Keep the streak alive. 🔥
