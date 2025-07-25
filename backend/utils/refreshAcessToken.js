@@ -1,6 +1,6 @@
 import UserModel from "../models/User.js";
 import UserRefreshTokenModel from "../models/UserRefreshToken.js";
-import generateTokens from "./generatetokens.js";
+import generateTokens from "./generateTokens.js";
 import verifyRefreshToken from "./verifyRefreshToken.js";
 
 const refreshAccessToken = async (req, res) => {
