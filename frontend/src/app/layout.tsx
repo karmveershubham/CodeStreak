@@ -16,6 +16,9 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "CodeStreak",
   description: "Keep Your Code Streak Alive",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
