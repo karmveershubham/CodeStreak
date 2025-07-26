@@ -7,6 +7,8 @@ const nextConfig: NextConfig = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+  // Disable strict mode temporarily to reduce hydration sensitivity
+  reactStrictMode: false,
 };
 
 export default nextConfig;

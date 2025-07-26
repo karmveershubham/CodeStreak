@@ -4,6 +4,9 @@ import express from 'express'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import userRouter from './routes/userRoutes.js'
+import goalRouter from './routes/goalRoutes.js'
+import weeklyPlanRouter from './routes/weeklyPlanRoutes.js'
+import streakRouter from './routes/streakRoutes.js'
 import connectDB from './config/connectdb.js'
 import passport from 'passport'
 import './config/passport-jwt.js'
@@ -37,21 +40,24 @@ app.use(passport.initialize())
 app.use(cookieParser())
 
 app.use('/api/user/', userRouter);
+app.use('/api/goals/', goalRouter);
+app.use('/api/weekly-plans/', weeklyPlanRouter);
+app.use('/api/streaks/', streakRouter);
 
 // Google Auth Routes
 app.get('/auth/google',
   passport.authenticate('google', { session: false, scope: ['profile', 'email'] }));
 
 app.get('/auth/google/callback',
-  passport.authenticate('google', { session: false, failureRedirect: `${process.env.FRONTEND_HOST} /account/login` }),
+  passport.authenticate('google', { session: false, failureRedirect: `${process.env.FRONTEND_HOST}/login` }),
   (req, res) => {
 
     // Access user object and tokens from req.user
     const { user, accessToken, refreshToken, accessTokenExp, refreshTokenExp } = req.user;
     setTokensCookies(res, accessToken, refreshToken, accessTokenExp, refreshTokenExp)
 
-    // Successful authentication, redirect home.
-    res.redirect(`${process.env.FRONTEND_HOST}/user/profile`);
+    // Successful authentication, redirect to profile page
+    res.redirect(`${process.env.FRONTEND_HOST}/profile`);
   });
 
 app.listen(port, () => {

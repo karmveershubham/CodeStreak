@@ -20,6 +20,10 @@ Codestreak is an AI-driven platform that helps coders stay consistent, sharp, an
 - Automatically notifies users 1 hour before coding contests
 - Supports **Codeforces**, **LeetCode**, and more
 
+### 🧑‍🤝‍🧑 Custom Room Battles
+- Create or join rooms to compete with friends or college mates
+- Compete on selected topics and compare results
+
 ### 🏫 College Leaderboards
 - Track top performers from your college
 - View streaks, total problems solved, and competition wins
@@ -159,17 +163,41 @@ cd codestreak
 
 #### 📦 `backend/.env`
 ```env
-MONGO_URI=your_mongodb_uri
-OPENAI_API_KEY=your_openai_key
+# Server
+PORT=5000
+
+# Database
+DATABASE_URL=mongodb+srv://username:password@cluster0.mongodb.net/codestreak
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USER=example@gmail.com
+EMAIL_PASS=your_email_app_password
+EMAIL_FROM="CodeStreak <no-reply@codestreak.com>"
+
+# JWT
+JWT_ACCESS_TOKEN_SECRET_KEY=your_access_secret
+JWT_REFRESH_TOKEN_SECRET_KEY=your_refresh_secret
+SALT=10
+
+# Frontend
+FRONTEND_HOST=http://localhost:3000
+
+# Google OAuth
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+
+#Gemini API
+GEMINI_API_KEY=your_gemini_api
+GEMINI_API_URL=your_gemini_url
+
+# Twilio
 TWILIO_SID=your_twilio_sid
-TWILIO_AUTH=your_twilio_token
+TWILIO_AUTH=your_twilio_auth_token
 ```
 
 #### 🌐 `frontend/.env.local`
 ```env
-NEXTAUTH_URL=http://localhost:3000
-NEXTAUTH_SECRET=your_secret
-BACKEND_URL=http://localhost:5000
+NEXT_PUBLIC_API_URL=http://localhost:8080  
 ```
 
 ### 3. Run Backend
@@ -183,8 +211,19 @@ npm run dev
 ```bash
 cd frontend
 npm install
-npm run dev
+npm start
 ```
+
+----
+# How to Get a Gemini AI API Key
+
+To use Gemini AI features in this project, you need a Gemini API key from Google AI Studio:
+
+1. Go to [Google AI Studio](https://aistudio.google.com/app/apikey)
+2. Sign in with your Google account.
+3. Click "Create API key".
+4. A key will be generated for you immediately.
+5. Copy the API key, API URL securely and use it in your `.env` file as `GEMINI_API_KEY` and `GEMINI_API_URL`.
 
 ---
 
@@ -197,7 +236,9 @@ npm run dev
 
 ---
 
-## 🙌 Contributors
+## 🙌 Mentor
+Feel free to connect for the help
+[Uma Mahesh](https://github.com/nagaumamahesh)
 
 ---
 
@@ -209,6 +250,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 💬 Feedback & Suggestions
 
-Feel free to [open an issue](https://github.com/your-username/codestreak/issues) or reach out via [email](mailto:skarmveer1201@gmail.com).
+Feel free to [open an issue](https://github.com/karmveershubham/codestreak/issues) or reach out via [email](mailto:skarmveer1201@gmail.com).
 
 > Stay consistent. Keep the streak alive. 🔥

@@ -1,0 +1,4 @@
+repository:
+  name: CodeStreak
+  description: AI-powered DSA and contest platform
+  private: false
