@@ -89,7 +89,7 @@ export default function Login() {
         </div>
         
         <div className="w-full text-center">
-          <p className="text-white text-sm">Don’t have an account? <a href="#" className="text-blue-400">Signup</a></p>
+          <p className="text-white text-sm">Don't have an account? <a href="/signup" className="text-blue-400">Signup</a></p>
         </div>
       </div>
     </div>

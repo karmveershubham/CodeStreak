@@ -10,8 +10,8 @@ const Main = () => {
       </p>
       <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
         
-        <a href="/signup" className="px-8 py-3 bg-white text-black rounded-full font-semibold hover:bg-gray-300 transition">Join Now</a>
-        <a href="/login" className="px-8 py-3 border border-white rounded-full font-semibold hover:bg-white hover:text-black transition">Log In</a>
+        <a href="/signup" className="px-8 py-3 bg-white text-black rounded-full font-semibold hover:bg-gray-300 transition" suppressHydrationWarning={true}>Join Now</a>
+        <a href="/login" className="px-8 py-3 border border-white rounded-full font-semibold hover:bg-white hover:text-black transition" suppressHydrationWarning={true}>Log In</a>
       </div>
     </main>
   );
