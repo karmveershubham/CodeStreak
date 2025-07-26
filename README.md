@@ -186,6 +186,10 @@ FRONTEND_HOST=http://localhost:3000
 GOOGLE_CLIENT_ID=your_google_client_id
 GOOGLE_CLIENT_SECRET=your_google_client_secret
 
+#Gemini API
+GEMINI_API_KEY=your_gemini_api
+GEMINI_API_URL=your_gemini_url
+
 # Twilio
 TWILIO_SID=your_twilio_sid
 TWILIO_AUTH=your_twilio_auth_token
@@ -209,6 +213,17 @@ cd frontend
 npm install
 npm start
 ```
+
+----
+# How to Get a Gemini AI API Key
+
+To use Gemini AI features in this project, you need a Gemini API key from Google AI Studio:
+
+1. Go to [Google AI Studio](https://aistudio.google.com/app/apikey)
+2. Sign in with your Google account.
+3. Click "Create API key".
+4. A key will be generated for you immediately.
+5. Copy the API key, API URL securely and use it in your `.env` file as `GEMINI_API_KEY` and `GEMINI_API_URL`.
 
 ---
 
