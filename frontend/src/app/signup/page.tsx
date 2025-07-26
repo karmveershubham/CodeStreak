@@ -10,7 +10,6 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Checkbox } from "@/components/ui/checkbox"
 
 export default function SignUpPage() {
   const [formData, setFormData] = useState({
@@ -24,7 +23,6 @@ export default function SignUpPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
-  const [agreeToTerms, setAgreeToTerms] = useState(false)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -73,10 +71,6 @@ export default function SignUpPage() {
       setError("Passwords do not match")
       return false
     }
-    if (!agreeToTerms) {
-      setError("Please agree to the Terms of Service and Privacy Policy")
-      return false
-    }
     return true
   }
 
@@ -88,20 +82,39 @@ export default function SignUpPage() {
     setError("")
 
     try {
-      // Simulate API call - replace with your actual signup logic
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+          password_confirmation: formData.confirmPassword,
+        }),
+      });
 
-      // For demo purposes, we'll show success
-      setSuccess("Account created successfully! Please check your email to verify your account.")
+      const data = await response.json();
 
-      // Reset form
-      setFormData({
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      })
-      setAgreeToTerms(false)
+      if (response.ok) {
+        setSuccess("Account created successfully! Redirecting to your profile...")
+        
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+        })
+        
+        // Redirect to profile page after a short delay
+        setTimeout(() => {
+          window.location.href = '/profile';
+        }, 2000);
+      } else {
+        setError(data.message || 'Registration failed. Please try again.');
+      }
     } catch (error) {
       console.error("Signup error:", error)
       setError("Something went wrong. Please try again later.")
@@ -112,7 +125,7 @@ export default function SignUpPage() {
 
   const handleGoogleSignup = () => {
     // Redirect to Google OAuth endpoint
-    window.location.href = `${process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000'}/auth/google`
+    window.location.href = `${process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'}/auth/google`
   }
 
   return (
@@ -149,10 +162,10 @@ export default function SignUpPage() {
             <Button
               type="button"
               variant="outline"
-              className="w-full h-12 bg-transparent border-gray-600 text-white hover:bg-gray-700/50 hover:border-gray-500 text-base font-medium flex items-center justify-center"
+              className="w-full h-12 bg-transparent border-gray-600 text-white hover:bg-gray-700/50 hover:border-gray-500 text-base font-medium flex items-center justify-center gap-2"
               onClick={handleGoogleSignup}
             >
-              <Mail className="w-5 h-5 mr-2" />
+              <Mail className="w-5 h-5 -translate-y-px" />
               Continue with Google
             </Button>
           </div>
@@ -265,9 +278,11 @@ export default function SignUpPage() {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full h-12 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold disabled:opacity-50 disabled:cursor-not-allowed mt-6"
+              className="w-full h-12 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold disabled:opacity-50 disabled:cursor-not-allowed mt-6 text-base tracking-wide"
             >
-              {isLoading ? "Creating Account..." : "Create Account"}
+              <span className="flex items-center justify-center">
+                {isLoading ? "Creating Account..." : "Create Account"}
+              </span>
             </Button>
           </form>
 

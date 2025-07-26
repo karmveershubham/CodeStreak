@@ -43,15 +43,15 @@ app.get('/auth/google',
   passport.authenticate('google', { session: false, scope: ['profile', 'email'] }));
 
 app.get('/auth/google/callback',
-  passport.authenticate('google', { session: false, failureRedirect: `${process.env.FRONTEND_HOST} /account/login` }),
+  passport.authenticate('google', { session: false, failureRedirect: `${process.env.FRONTEND_HOST}/login` }),
   (req, res) => {
 
     // Access user object and tokens from req.user
     const { user, accessToken, refreshToken, accessTokenExp, refreshTokenExp } = req.user;
     setTokensCookies(res, accessToken, refreshToken, accessTokenExp, refreshTokenExp)
 
-    // Successful authentication, redirect home.
-    res.redirect(`${process.env.FRONTEND_HOST}/user/profile`);
+    // Successful authentication, redirect to profile page
+    res.redirect(`${process.env.FRONTEND_HOST}/profile`);
   });
 
 app.listen(port, () => {
