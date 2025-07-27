@@ -1,7 +1,7 @@
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import passport from 'passport';
 import UserModel from '../models/User.js';
-import generateTokens from '../utils/generatetokens.js';
+import generateTokens from '../utils/generateTokens.js';
 import bcrypt from 'bcrypt'
 import dotenv from 'dotenv'
 dotenv.config();

@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken"
-const isTokenExpire = (token) => {
+const isTokenExpired = (token) => {
   if (!token) {
     return true
   }
@@ -8,4 +8,4 @@ const isTokenExpire = (token) => {
   return decodedToken.exp < currentTime
 }
 
-export default isTokenExpire
+export default isTokenExpired
