@@ -1,3 +1,4 @@
+import ThemeToggle from "../components/ThemeToggle";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -29,6 +30,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning={true}
       >
+        <div className="absolute right-4 top-4 z-50">
+          <ThemeToggle />
+        </div>
         {children}
       </body>
     </html>
