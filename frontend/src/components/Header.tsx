@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import logo from "@/../../public/images/codestreaklogo.webp";
 import { Moon, Sun } from "lucide-react";
+import Link from 'next/link';
+
 
 const Header = () => {
   const [isDark, setIsDark] = useState(false);
@@ -58,8 +60,8 @@ const Header = () => {
       </div>
 
       <nav className="flex space-x-4 items-center">
-        <a href="#" className="mt-2 hover:underline">About</a>
-        <a href="#" className="mt-2 hover:underline">Features</a>
+        <a href="/about" className="mt-2 hover:underline">About</a>
+        <a href="/features" className="mt-2 hover:underline">Features</a>
         <a
           href="/login"
           className="px-4 py-2 mt-1 text-white rounded shadow transition"

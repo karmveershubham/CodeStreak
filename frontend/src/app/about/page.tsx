@@ -42,24 +42,6 @@ const AboutPage: React.FC = () => {
           ))}
         </div>
       </section>
-
-      {/* Team Info Section */}
-      <section className="mb-16">
-        <h2 className="text-3xl font-bold mb-6 text-center text-zinc-800 dark:text-zinc-100">Meet the Team</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {[
-            {
-              name: "Anushka Srivastava",
-              role: "Backend Developer",
-              avatarUrl: "https://avatars.githubusercontent.com/u/131137777?v=4",
-              github: "https://github.com/anushkacodes",
-              linkedin: "https://www.linkedin.com/in/anushka-srivastava-dev/",
-            },
-          ].map((member) => (
-            <TeamCard key={member.name} {...member} />
-          ))}
-        </div>
-      </section>
     </div>
   );
 };
