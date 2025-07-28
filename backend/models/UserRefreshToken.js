@@ -5,8 +5,7 @@ const userRefreshTokenSchema =new mongoose.Schema({
     required: true},
     token:{type:String, required:true},
     blacklisted:{ type:Boolean, default:false},
-    createdAt:{type:Date, default:Date.now, expires:'5d' }
-    
+    createdAt:{type:Date, default:Date.now, expires:'5d' }  
 })
 
 const userRefreshTokenModel=mongoose.model("UserRefreshToken", userRefreshTokenSchema);

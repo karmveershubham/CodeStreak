@@ -1,9 +1,9 @@
 // This middleware will set Authorization Header and will refresh access token on expire
 // if we use this middleware we won't have to explicitly make request to refresh-token api url
 
-import refreshAccessToken from "../utils/refreshAcessToken.js";
+import refreshAccessToken from "../utils/refreshAccessToken.js";
 import isTokenExpired from "../utils/isTokenExpired.js";
-import setTokensCookies from "../utils/setTokenCookies.js";
+import setTokensCookies from "../utils/setTokensCookies.js";
 
 const accessTokenAutoRefresh = async (req, res, next) => {
   try {
