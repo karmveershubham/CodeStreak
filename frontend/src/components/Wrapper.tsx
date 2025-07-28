@@ -15,7 +15,7 @@ const LandingPage = () => {
  
   useEffect(() => {
     setMounted(true);
-    setColor(theme === "dark" ? "#00eaff" : "#00eaff");
+    setColor(theme === "dark" ? "#00eaff" : "#000000ff");
   }, [theme]);
 
   // Prevent hydration mismatch by not rendering particles until mounted
@@ -33,7 +33,7 @@ const LandingPage = () => {
   }
  
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-900 to-black text-center text-white">
+    <div className="relative min-h-screen flex flex-col items-center justify-center text-center text-black dark:text-white transition-colors duration-300 bg-gradient-to-br from-[#dfd7ff] to-[#e1dcf2] dark:from-[#001f3f] dark:to-[#000000]">
       <ClientOnly>
         <Header />
       </ClientOnly>
