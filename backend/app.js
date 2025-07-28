@@ -7,17 +7,22 @@ import userRouter from './routes/userRoutes.js'
 import goalRouter from './routes/goalRoutes.js'
 import weeklyPlanRouter from './routes/weeklyPlanRoutes.js'
 import streakRouter from './routes/streakRoutes.js'
-import connectDB from './config/connectdb.js'
+import connectDB from './config/connectDb.js'
 import passport from 'passport'
-import './config/passport-jwt.js'
-import './config/google-strategy.js'
-import setTokensCookies from './utils/setTokenCookies.js'
+import './config/passportJwt.js'
+import './config/googleStrategy.js'
+import setTokensCookies from './utils/setTokensCookies.js'
 const app=express()
 const port=process.env.PORT
 const DATABASE_URL=process.env.DATABASE_URL
 
+const allowedOrigins = [
+  process.env.FRONTEND_HOST,
+  'http://localhost:3000',
+];
+
 const corsOptions={
-    origin: process.env.FRONTEND_HOST,
+    origin: allowedOrigins,
     credentials:true,
     optionSuccessStatus:200,
 };
