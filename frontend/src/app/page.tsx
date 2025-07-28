@@ -1,7 +1,6 @@
 import React from 'react';
 
-import Wrapper from '@/components/Wrapper';
-
+import Wrapper from "@/components/Wrapper";
 
 const Page = () => {
   return (
@@ -9,6 +8,6 @@ const Page = () => {
     <Wrapper/>
     </>
   );
-};
+};  
 
 export default Page;
