@@ -9,9 +9,13 @@ import { useTheme } from "next-themes";
 import {Particles} from "@/components/magicui/particles";
 
 const LandingPage = () => {
-  const { theme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const [color, setColor] = useState("#00eaff");
   const [mounted, setMounted] = useState(false);
+
+  const toggleDark = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
  
   useEffect(() => {
     setMounted(true);
@@ -23,7 +27,7 @@ const LandingPage = () => {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-900 to-black text-center text-white">
         <ClientOnly>
-          <Header />
+          <Header toggleDark={toggleDark} isDark={theme === 'dark'} />
         </ClientOnly>
         <ClientOnly>
           <Main />
@@ -35,7 +39,7 @@ const LandingPage = () => {
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center text-center text-black dark:text-white transition-colors duration-300 bg-gradient-to-br from-[#dfd7ff] to-[#e1dcf2] dark:from-[#001f3f] dark:to-[#000000]">
       <ClientOnly>
-        <Header />
+        <Header toggleDark={toggleDark} isDark={theme === 'dark'} />
       </ClientOnly>
       <Particles
         className="absolute inset-0"

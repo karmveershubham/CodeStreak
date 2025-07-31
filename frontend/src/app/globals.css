@@ -1,32 +1,699 @@
+/* Synchronized theme transition styles - all components switch together */
+.theme-transitioning {
+  transition: background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+}
+
+/* Force immediate synchronized transitions for all elements */
+.theme-transitioning *,
+.theme-transitioning *::before,
+.theme-transitioning *::after {
+  transition: background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+              border-color 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+              color 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+              fill 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+              stroke 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+              opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+              box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s !important;
+  transition-delay: 0s !important;
+}
+
+/* Specific component synchronization */
+.theme-transitioning header,
+.theme-transitioning nav,
+.theme-transitioning main,
+.theme-transitioning section,
+.theme-transitioning article,
+.theme-transitioning aside,
+.theme-transitioning footer,
+.theme-transitioning div,
+.theme-transitioning span,
+.theme-transitioning p,
+.theme-transitioning h1,
+.theme-transitioning h2,
+.theme-transitioning h3,
+.theme-transitioning h4,
+.theme-transitioning h5,
+.theme-transitioning h6 {
+  transition: background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+              border-color 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+              color 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s !important;
+  transition-delay: 0s !important;
+}
+
+/* Force buttons and interactive elements to sync */
+.theme-transitioning button,
+.theme-transitioning a,
+.theme-transitioning input,
+.theme-transitioning select,
+.theme-transitioning textarea {
+  transition: background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+              border-color 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+              color 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s !important;
+  transition-delay: 0s !important;
+}
+
+/* Pause heavy animations during theme transitions */
+.theme-transitioning [class*="animate-"],
+.theme-transitioning [class*="animation-"] {
+  animation-play-state: paused !important;
+}
+
+/* Override any existing transition delays */
+.theme-transitioning [class*="delay-"],
+.theme-transitioning [style*="transition-delay"] {
+  transition-delay: 0s !important;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* Synchronized Section Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(3deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(3deg);
+  }
+}
+
+/* Logo specific animations */
+@keyframes logo-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes orbit {
+  0% {
+    transform: rotate(0deg) translateX(20px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(20px) rotate(-360deg);
+  }
+}
+
+@keyframes gradient-x {
+  0%, 100% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-logo-float {
+  animation: logo-float 2s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-sparkle {
+  animation: sparkle 3s ease-in-out infinite;
+}
+
+.animate-orbit {
+  animation: orbit 6s linear infinite;
+}
+
+/* Logo hover effects */
+@keyframes logo-hover-bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-8px);
+  }
+  60% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes logo-glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3), 0 0 40px rgba(147, 51, 234, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.6), 0 0 80px rgba(147, 51, 234, 0.4);
+  }
+}
+
+@keyframes logo-rotate-3d {
+  0% {
+    transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+  }
+  25% {
+    transform: perspective(1000px) rotateY(90deg) rotateX(15deg);
+  }
+  50% {
+    transform: perspective(1000px) rotateY(180deg) rotateX(0deg);
+  }
+  75% {
+    transform: perspective(1000px) rotateY(270deg) rotateX(-15deg);
+  }
+  100% {
+    transform: perspective(1000px) rotateY(360deg) rotateX(0deg);
+  }
+}
+
+@keyframes logo-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-logo-hover-bounce {
+  animation: logo-hover-bounce 0.6s ease-in-out;
+}
+
+.animate-logo-glow-pulse {
+  animation: logo-glow-pulse 1.5s ease-in-out infinite;
+}
+
+.animate-logo-rotate-3d {
+  animation: logo-rotate-3d 2s ease-in-out infinite;
+}
+
+.animate-logo-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  background-size: 200% 100%;
+  animation: logo-shimmer 1.5s ease-in-out infinite;
+}
+
+/* Magnetic logo effects */
+@keyframes logo-magnetic {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(2px, -1px) scale(1.02);
+  }
+  50% {
+    transform: translate(-1px, 2px) scale(1.01);
+  }
+  75% {
+    transform: translate(-2px, -1px) scale(1.02);
+  }
+}
+
+@keyframes logo-ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.animate-logo-magnetic {
+  animation: logo-magnetic 3s ease-in-out infinite;
+}
+
+.animate-logo-ripple {
+  animation: logo-ripple 0.6s ease-out;
+}
+
+/* Animation utilities */
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Gradient text animations */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+.animate-gradient-x {
+  background-size: 400% 400%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* Floating particles animation */
+@keyframes float-particles {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translateY(-20px) rotate(90deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-40px) rotate(180deg);
+    opacity: 0.9;
+  }
+  75% {
+    transform: translateY(-20px) rotate(270deg);
+    opacity: 0.6;
+  }
+}
+
+.animate-float-particles {
+  animation: float-particles 12s ease-in-out infinite;
+}
+
+/* Wave animations */
+@keyframes wave {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes wave-reverse {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-wave {
+  animation: wave 15s ease-in-out infinite;
+}
+
+.animate-wave-reverse {
+  animation: wave-reverse 20s ease-in-out infinite;
+}
+
+.animate-wave-slow {
+  animation: wave 25s ease-in-out infinite;
+}
+
+.animate-wave-fast {
+  animation: wave 10s ease-in-out infinite;
+}
+
+/* Custom button effects */
+.btn-magnetic {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-magnetic:hover {
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
+/* Smooth transitions for all interactive elements */
+button, a, input, select {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Instant theme transitions for specific elements */
+header, nav, footer, main {
+  /* No transitions for instant theme switching */
+}
+
+/* Focus styles */
+button:focus,
+input:focus,
+select:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: #3b82f6;
+  ring-opacity: 0.5;
+}
+
+/* Loading animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin 3s linear infinite;
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Glowing border effect */
+.glow-border {
+  position: relative;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+  border-radius: 12px;
+  padding: 2px;
+}
+
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #10b981);
+  border-radius: inherit;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: xor;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.glow-border:hover::before {
+  opacity: 1;
+}
+
+/* Typography enhancements */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+p {
+  line-height: 1.6;
+}
+
+/* Tailwind hover class optimizations */
+.hover\:scale-105:hover {
+  transform: scale(1.05) !important;
+}
+
+.hover\:scale-110:hover {
+  transform: scale(1.1) !important;
+}
+
+.hover\:-translate-y-1:hover {
+  transform: translateY(-0.25rem) !important;
+}
+
+.hover\:-translate-y-2:hover {
+  transform: translateY(-0.5rem) !important;
+}
+
+.hover\:shadow-lg:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+.hover\:shadow-xl:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+}
+
+.hover\:shadow-2xl:hover {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Group hover effects */
+.group:hover .group-hover\:scale-105 {
+  transform: scale(1.05);
+}
+
+.group:hover .group-hover\:scale-110 {
+  transform: scale(1.1);
+}
+
+.group:hover .group-hover\:-translate-y-1 {
+  transform: translateY(-0.25rem);
+}
+
+.group:hover .group-hover\:opacity-100 {
+  opacity: 1;
+}
+
+.group:hover .group-hover\:opacity-0 {
+  opacity: 0;
+}
+
+/* Enhanced transitions for specific Tailwind utilities */
+[class*="transition-"]:not([class*="transition-none"]) {
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.transition-transform {
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.transition-all {
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.transition-colors {
+  transition: none !important;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Minimal animation optimization with GPU acceleration */
+[class*="translate-"],
+[class*="scale-"],
+[class*="rotate-"] {
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* GPU acceleration for theme-sensitive elements */
+.theme-transitioning,
+.theme-transitioning * {
+  will-change: background-color, color, border-color;
+  transform: translateZ(0); /* Force hardware acceleration */
+}
+
+/* Optimize heavy elements during theme transitions */
+.theme-transitioning canvas,
+.theme-transitioning [class*="gradient"],
+.theme-transitioning [class*="shadow"] {
+  will-change: auto;
+  transform: none;
+}
+
+/* Custom smooth easing curves */
+.ease-smooth {
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.ease-bounce-out {
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.ease-elastic {
+  transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .animate-float {
+    animation-duration: 4s;
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+  
+  /* Reduce hover effects on mobile for better touch experience */
+  button:hover,
+  a:hover,
+  .card-hover:hover {
+    transform: translateY(-2px) scale(1.01);
+  }
+  
+  /* Smaller shadows on mobile */
+  .hover\:shadow-xl:hover,
+  .hover\:shadow-2xl:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
+    --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
     --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 10% 3.9%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
@@ -39,36 +706,32 @@ body {
     --color-4: 195 100% 63%;
     --color-5: 90 100% 63%;
   }
+
   .dark {
-    --background: 240 10% 3.9%;
+    --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
+    --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
+    --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
     --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
     --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
     --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
-    --color-1: 0 100% 63%;
-    --color-2: 270 100% 63%;
-    --color-3: 210 100% 63%;
-    --color-4: 195 100% 63%;
-    --color-5: 90 100% 63%;
   }
 }
 
