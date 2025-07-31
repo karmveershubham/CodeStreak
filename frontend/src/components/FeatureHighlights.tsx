@@ -46,7 +46,7 @@ const FeatureHighlights: React.FC<FeatureHighlightsProps> = ({ isDark }) => {
   ];
 
   return (
-    <section id="features" className={`py-20 px-4 relative overflow-hidden transition-colors duration-300 ${isDark ? 'bg-slate-800' : 'bg-white'}`}>
+    <section id="features" className={`py-20 px-4 relative overflow-hidden transition-colors duration-300 bg-transparent`}>
       {/* Lightweight background pattern */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute top-10 left-10 w-2 h-2 bg-blue-400 rounded-full"></div>

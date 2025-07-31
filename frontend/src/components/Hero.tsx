@@ -1,13 +1,19 @@
 'use client'
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Play, ArrowRight, Zap } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  isDark: boolean;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const Hero: React.FC<HeroProps> = ({ isDark }) => {
+  // Note: isDark prop is passed for consistency but theme is handled by Tailwind dark: classes
   const router = useRouter();
   const [typewriterText, setTypewriterText] = useState('');
-  const phrases = ['Daily LeetCode', 'Crack Amazon', 'Codeforces Reminders', 'Build Streaks'];
+  const phrases = useMemo(() => ['Daily LeetCode', 'Crack Amazon', 'Codeforces Reminders', 'Build Streaks'], []);
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -38,7 +44,7 @@ const Hero: React.FC = () => {
   }, [typewriterText, isDeleting, currentPhraseIndex, phrases]);
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center px-4 pt-20 relative overflow-hidden bg-gray-50 dark:bg-slate-900">
+    <section id="hero" className="min-h-screen flex items-center justify-center px-4 pt-20 relative overflow-hidden bg-transparent">
       {/* Static background gradient - Removed heavy animation */}
       <div className="absolute inset-0 bg-gradient-to-tr from-cyan-300/20 via-blue-300/20 to-violet-400/20 dark:from-cyan-500/10 dark:via-blue-500/10 dark:to-violet-600/10"></div>
       
@@ -107,7 +113,7 @@ const Hero: React.FC = () => {
                   <div className="bg-gray-800 rounded-lg p-4">
                     <div className="text-green-400 text-sm mb-2">🔥 Day 15 Streak!</div>
                     <div className="text-white text-sm mb-3">
-                      Today's Challenge: Two Sum Problem
+                      Today&apos;s Challenge: Two Sum Problem
                     </div>
                     <div className="text-gray-300 text-xs">
                       Given an array of integers, return indices of two numbers that add up to a target...

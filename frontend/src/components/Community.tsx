@@ -21,7 +21,7 @@ const Community: React.FC<CommunityProps> = ({ isDark }) => {
   ];
 
   return (
-    <section id="community" className={`py-20 px-4 relative overflow-hidden transition-all duration-500 ${isDark ? 'bg-slate-900' : 'bg-gray-50'}`}>
+    <section id="community" className={`py-20 px-4 relative overflow-hidden transition-all duration-500 bg-transparent`}>
       {/* Animated background gradient - Same as CTA but different colors */}
       <div className={`absolute inset-0 transition-all duration-500 ${
         isDark 
@@ -41,7 +41,7 @@ const Community: React.FC<CommunityProps> = ({ isDark }) => {
         
         <div className="grid lg:grid-cols-2 gap-12">
           {/* College Leaderboard */}
-          <div className={`p-8 rounded-2xl ${isDark ? 'bg-slate-800' : 'bg-white'} shadow-xl`}>
+          <div className={`p-6 rounded-xl ${isDark ? 'bg-slate-800/90' : 'bg-white/95'} shadow-lg backdrop-blur-sm`}>
             <div className="flex items-center gap-3 mb-8">
               <Crown className="w-8 h-8 text-yellow-500" />
               <h3 className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
@@ -53,7 +53,7 @@ const Community: React.FC<CommunityProps> = ({ isDark }) => {
               {leaderboard.map((college, index) => (
                 <div
                   key={index}
-                  className={`flex items-center justify-between p-4 rounded-xl transition-all duration-300 hover:scale-105 ${
+                  className={`flex items-center justify-between p-4 rounded-xl transition-all duration-200 hover:scale-[1.02] ${
                     index === 0 
                       ? 'bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/20' 
                       : isDark ? 'bg-slate-700 hover:bg-slate-600' : 'bg-gray-50 hover:bg-gray-100'
@@ -85,7 +85,7 @@ const Community: React.FC<CommunityProps> = ({ isDark }) => {
           </div>
           
           {/* Top Coders */}
-          <div className={`p-8 rounded-2xl ${isDark ? 'bg-slate-800' : 'bg-white'} shadow-xl`}>
+          <div className={`p-6 rounded-xl ${isDark ? 'bg-slate-800/90' : 'bg-white/95'} shadow-lg backdrop-blur-sm`}>
             <div className="flex items-center gap-3 mb-8">
               <Flame className="w-8 h-8 text-orange-500" />
               <h3 className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
@@ -97,7 +97,7 @@ const Community: React.FC<CommunityProps> = ({ isDark }) => {
               {topCoders.map((coder, index) => (
                 <div
                   key={index}
-                  className={`flex items-center gap-4 p-4 rounded-xl transition-all duration-300 hover:scale-105 ${
+                  className={`flex items-center gap-4 p-4 rounded-xl transition-all duration-200 hover:scale-[1.02] ${
                     isDark ? 'bg-slate-700 hover:bg-slate-600' : 'bg-gray-50 hover:bg-gray-100'
                   }`}
                 >
@@ -123,7 +123,7 @@ const Community: React.FC<CommunityProps> = ({ isDark }) => {
             </div>
             
             {/* Room Battle Preview */}
-            <div className={`mt-8 p-6 rounded-xl border-2 border-dashed ${isDark ? 'border-purple-500/30 bg-purple-500/5' : 'border-purple-500/30 bg-purple-50'}`}>
+            <div className={`mt-6 p-4 rounded-lg border border-dashed ${isDark ? 'border-purple-500/20 bg-purple-500/5' : 'border-purple-500/20 bg-purple-50/50'}`}>
               <div className="flex items-center gap-3 mb-4">
                 <Award className="w-6 h-6 text-purple-500" />
                 <span className={`font-semibold ${isDark ? 'text-purple-400' : 'text-purple-600'}`}>
@@ -133,7 +133,7 @@ const Community: React.FC<CommunityProps> = ({ isDark }) => {
               <div className={`text-sm ${isDark ? 'text-gray-300' : 'text-gray-600'} mb-4`}>
                 5 friends competing • 3 days left
               </div>
-              <button className="w-full bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white py-2 px-4 rounded-lg font-semibold transition-all duration-300 hover:scale-105">
+              <button className="w-full bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white py-2 px-4 rounded-lg font-semibold transition-all duration-200 hover:scale-[1.02]">
                 Join Battle
               </button>
             </div>

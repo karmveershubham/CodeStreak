@@ -1,10 +1,67 @@
-/* Theme transition styles - Instant switching for performance */
+/* Synchronized theme transition styles - all components switch together */
 .theme-transitioning {
-  /* No transitions for instant theme switching */
+  transition: background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s;
 }
 
-.theme-transitioning * {
-  /* No transitions for instant theme switching */
+/* Force immediate synchronized transitions for all elements */
+.theme-transitioning *,
+.theme-transitioning *::before,
+.theme-transitioning *::after {
+  transition: background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+              border-color 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+              color 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+              fill 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+              stroke 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+              opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+              box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s !important;
+  transition-delay: 0s !important;
+}
+
+/* Specific component synchronization */
+.theme-transitioning header,
+.theme-transitioning nav,
+.theme-transitioning main,
+.theme-transitioning section,
+.theme-transitioning article,
+.theme-transitioning aside,
+.theme-transitioning footer,
+.theme-transitioning div,
+.theme-transitioning span,
+.theme-transitioning p,
+.theme-transitioning h1,
+.theme-transitioning h2,
+.theme-transitioning h3,
+.theme-transitioning h4,
+.theme-transitioning h5,
+.theme-transitioning h6 {
+  transition: background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+              border-color 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+              color 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s !important;
+  transition-delay: 0s !important;
+}
+
+/* Force buttons and interactive elements to sync */
+.theme-transitioning button,
+.theme-transitioning a,
+.theme-transitioning input,
+.theme-transitioning select,
+.theme-transitioning textarea {
+  transition: background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+              border-color 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+              color 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0s !important;
+  transition-delay: 0s !important;
+}
+
+/* Pause heavy animations during theme transitions */
+.theme-transitioning [class*="animate-"],
+.theme-transitioning [class*="animation-"] {
+  animation-play-state: paused !important;
+}
+
+/* Override any existing transition delays */
+.theme-transitioning [class*="delay-"],
+.theme-transitioning [style*="transition-delay"] {
+  transition-delay: 0s !important;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
@@ -545,11 +602,27 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Minimal animation optimization */
+/* Minimal animation optimization with GPU acceleration */
 [class*="translate-"],
 [class*="scale-"],
 [class*="rotate-"] {
   backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* GPU acceleration for theme-sensitive elements */
+.theme-transitioning,
+.theme-transitioning * {
+  will-change: background-color, color, border-color;
+  transform: translateZ(0); /* Force hardware acceleration */
+}
+
+/* Optimize heavy elements during theme transitions */
+.theme-transitioning canvas,
+.theme-transitioning [class*="gradient"],
+.theme-transitioning [class*="shadow"] {
+  will-change: auto;
+  transform: none;
 }
 
 /* Custom smooth easing curves */

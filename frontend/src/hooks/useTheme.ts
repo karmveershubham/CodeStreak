@@ -5,23 +5,26 @@ export const useTheme = () => {
     const html = document.documentElement;
     const isDark = html.classList.contains('dark');
     
-    // Add transition class for smooth theme switching
+    // Optimized theme switching with reduced reflows
     html.classList.add('theme-transitioning');
     
-    // Use requestAnimationFrame for smoother theme transitions
+    // Use double requestAnimationFrame for smoother transitions
     requestAnimationFrame(() => {
-      if (isDark) {
-        html.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
-      } else {
-        html.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-      }
-      
-      // Remove transition class after animation completes
-      setTimeout(() => {
-        html.classList.remove('theme-transitioning');
-      }, 300);
+      requestAnimationFrame(() => {
+        // Batch DOM updates for better performance
+        if (isDark) {
+          html.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
+        } else {
+          html.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+        }
+        
+        // Remove transition class after optimized duration
+        setTimeout(() => {
+          html.classList.remove('theme-transitioning');
+        }, 200); // Reduced from 300ms for snappier feel
+      });
     });
   }, []);
 

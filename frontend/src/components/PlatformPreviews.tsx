@@ -83,7 +83,7 @@ const PlatformPreviews: React.FC<PlatformPreviewsProps> = ({ isDark }) => {
   };
 
   return (
-    <section id="platforms" className={`py-20 px-4 transition-all duration-500 relative overflow-hidden ${isDark ? 'bg-slate-800' : 'bg-white'}`}>
+    <section id="platforms" className={`py-20 px-4 transition-all duration-500 relative overflow-hidden bg-transparent`}>
       {/* Animated Background - Fixed Positions */}
       <div className="absolute inset-0">
         {/* Floating circles animation - Fixed positions */}

@@ -29,7 +29,7 @@ const HowItWorks: React.FC<HowItWorksProps> = ({ isDark }) => {
   ];
 
   return (
-    <section className={`py-20 px-4 relative overflow-hidden transition-all duration-500 ${isDark ? 'bg-slate-900' : 'bg-gray-50'}`}>
+    <section className={`py-20 px-4 relative overflow-hidden transition-all duration-500 bg-transparent`}>
       {/* Animated background gradient - Same as CTA but different colors */}
       <div className={`absolute inset-0 transition-all duration-500 ${
         isDark 

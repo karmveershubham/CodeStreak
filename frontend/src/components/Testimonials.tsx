@@ -111,7 +111,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ isDark }) => {
               <Quote className={`w-8 h-8 mb-6 ${isDark ? 'text-blue-400' : 'text-blue-500'} opacity-60`} />
               
               <p className={`text-lg leading-relaxed mb-6 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                "{testimonial.text}"
+                &ldquo;{testimonial.text}&rdquo;
               </p>
               
               <div className="flex flex-wrap gap-2 mb-6">

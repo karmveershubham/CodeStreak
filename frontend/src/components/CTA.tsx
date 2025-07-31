@@ -29,7 +29,7 @@ const CTA: React.FC<CTAProps> = ({ isDark }) => {
   };
 
   return (
-    <section id="get-started" className={`py-20 px-4 transition-all duration-500 relative overflow-hidden ${isDark ? 'bg-slate-900' : 'bg-gray-50'}`}>
+    <section id="get-started" className={`py-20 px-4 transition-all duration-500 relative overflow-hidden bg-transparent`}>
       {/* Animated background gradient */}
       <div className={`absolute inset-0 transition-all duration-500 ${
         isDark 
