@@ -5,6 +5,7 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import userRouter from './routes/userRoutes.js'
 import goalRouter from './routes/goalRoutes.js'
+import leaderboardRouter from './routes/leaderboard.routes.js';
 import weeklyPlanRouter from './routes/weeklyPlanRoutes.js'
 import streakRouter from './routes/streakRoutes.js'
 import connectDB from './config/connectDb.js'
@@ -48,7 +49,8 @@ app.use('/api/user/', userRouter);
 app.use('/api/goals/', goalRouter);
 app.use('/api/weekly-plans/', weeklyPlanRouter);
 app.use('/api/streaks/', streakRouter);
-
+app.use('/api/leaderboard', leaderboardRouter);
+ 
 // Google Auth Routes
 app.get('/auth/google',
   passport.authenticate('google', { session: false, scope: ['profile', 'email'] }));
