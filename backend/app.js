@@ -1,7 +1,8 @@
-import dotenv from 'dotenv'
-dotenv.config()
+import logger from '../logger.js';
 import express from 'express'
 import cors from 'cors'
+import dotenv from 'dotenv';
+dotenv.config();
 import cookieParser from 'cookie-parser'
 import userRouter from './routes/userRoutes.js'
 import goalRouter from './routes/goalRoutes.js'
@@ -13,7 +14,7 @@ import './config/passportJwt.js'
 import './config/googleStrategy.js'
 import setTokensCookies from './utils/setTokensCookies.js'
 const app=express()
-const port=process.env.PORT
+const port=process.env.PORT 
 const DATABASE_URL=process.env.DATABASE_URL
 
 const allowedOrigins = [
@@ -49,6 +50,19 @@ app.use('/api/goals/', goalRouter);
 app.use('/api/weekly-plans/', weeklyPlanRouter);
 app.use('/api/streaks/', streakRouter);
 
+// Health check route to test winston logging
+app.get('/health', (req, res) => {
+  logger.info('Health check endpoint accessed');
+  logger.debug('Debug level log from health check');
+  logger.warn('Warning level log from health check');
+  
+  res.json({ 
+    status: 'OK', 
+    message: 'Server is running and winston logging is working',
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Google Auth Routes
 app.get('/auth/google',
   passport.authenticate('google', { session: false, scope: ['profile', 'email'] }));
@@ -66,6 +80,6 @@ app.get('/auth/google/callback',
   });
 
 app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`)
+  logger.info(`Server listening at http://localhost:${port}`)
 })
 
