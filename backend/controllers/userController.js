@@ -1,3 +1,4 @@
+import logger from '../../logger.js';
 import UserModel from '../models/User.js'
 import bcrypt from 'bcrypt'
 import EmailVerificationModel from '../models/EmailVerification.js';
@@ -44,7 +45,7 @@ class UserController {
             });
 
         }catch(error){
-            console.log(error);
+            logger.error('Error during user registration:', error);
             res.status(500).json({status: "failed", message: "unable to Register, please try again later"});
         }
     }
@@ -79,7 +80,7 @@ class UserController {
       const emailVerification = await EmailVerificationModel.findOne({ userId: existingUser._id, otp});
       if (!emailVerification) {
         if (!existingUser.is_verified) {
-          // console.log(existingUser);
+          logger.info('Resending email verification OTP:', existingUser);
           await sendEmailVerificationOTP(req, existingUser);
           return res.status(400).json({ status: "failed", message: "Invalid OTP, new OTP sent to your email" });
         }
@@ -106,7 +107,7 @@ class UserController {
       
       return res.status(200).json({ status: "success", message: "Email verified successfully" });
     } catch (error) {
-      console.error(error);
+      logger.error('Error verifying email:', error);
       res.status(500).json({ status: "failed", message: "Unable to verify email, please try again later" });
     }
   }
@@ -156,11 +157,10 @@ class UserController {
         is_auth: true
       });
 
-      console.log("User login succesful")
-
+      logger.info("User login successful");
 
     } catch (error) {
-      console.error(error);
+      logger.error('Error during user login:', error);
       res.status(500).json({ status: "failed", message: "Unable to login, please try again later" });
     }
   }
@@ -184,7 +184,7 @@ class UserController {
       });
 
     } catch (error) {
-      console.error(error);
+      logger.error('Error generating new token:', error);
       res.status(500).json({ status: "failed", message: "Unable to generate new token, please try again later" });
     }
   }
@@ -219,7 +219,7 @@ class UserController {
       // Send success response
       res.status(200).json({ status: "success", message: "Password changed successfully" });
     } catch (error) {
-      console.error(error);
+      logger.error('Error changing password:', error);
       res.status(500).json({ status: "failed", message: "Unable to change password, please try again later" });
     }
   }
@@ -242,8 +242,8 @@ class UserController {
       const token = jwt.sign({ userID: user._id }, secret, { expiresIn: '15m' });
       // Reset Link
       const resetLink = `${process.env.FRONTEND_HOST}/account/reset-password-confirm/${user._id}/${token}`;
-      console.log(resetLink);
-      // Send password reset email  
+      logger.info('Generated password reset link:', resetLink);
+      // Send password reset email
       await transporter.sendMail({
         from: process.env.EMAIL_FROM,
         to: user.email,
@@ -253,7 +253,7 @@ class UserController {
       // Send success response
       res.status(200).json({ status: "success", message: "Password reset email sent. Please check your email." });
     } catch (error) {
-      console.error(error);
+      logger.error('Error sending password reset email:', error);
       res.status(500).json({ status: "failed", message: "Unable to send password reset email. Please try again later." });
     }
   }
@@ -293,7 +293,7 @@ class UserController {
       res.status(200).json({ status: "success", message: "Password reset successfully" });
 
     } catch (error) {
-      console.log(error);
+      logger.error('Error during password reset:', error);
       if (error.name === "TokenExpiredError") {
         return res.status(400).json({ status: "failed", message: "Token expired. Please request a new password reset link." });
       }
@@ -322,7 +322,7 @@ class UserController {
       res.status(200).json({ status: "success", message: "Logout successful" });
       
     }catch(error){
-      console.error(error);
+      logger.error('Error during user logout:', error);
       res.status(500).json({ status: "failed", message: "Unable to logout, please try again later" });
     }
   }

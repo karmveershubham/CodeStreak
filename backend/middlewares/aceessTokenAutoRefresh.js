@@ -1,6 +1,7 @@
 // This middleware will set Authorization Header and will refresh access token on expire
 // if we use this middleware we won't have to explicitly make request to refresh-token api url
 
+import logger from '../../logger.js';
 import refreshAccessToken from "../utils/refreshAccessToken.js";
 import isTokenExpired from "../utils/isTokenExpired.js";
 import setTokensCookies from "../utils/setTokensCookies.js";
@@ -33,7 +34,7 @@ const accessTokenAutoRefresh = async (req, res, next) => {
     }
     next()
   } catch (error) {
-    console.error('Error adding access token to header:', error.message);
+    logger.error('Error adding access token to header:', error.message);
     // Handle the error, such as returning an error response or redirecting to the login page
     res.status(401).json({ error: 'Unauthorized', message: 'Access token is missing or invalid' });
   }

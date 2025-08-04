@@ -1,3 +1,4 @@
+import logger from '../../logger.js';
 import GoalModel from '../models/Goal.js';
 import UserModel from '../models/User.js';
 import { generateWeeklyPlan } from '../utils/gemini.js';
@@ -61,7 +62,7 @@ class GoalController {
       });
 
     } catch (error) {
-      console.error('Error creating goal:', error);
+      logger.error('Error creating goal:', error);
       res.status(500).json({
         status: "failed",
         message: "Unable to create goal, please try again later"
@@ -81,7 +82,7 @@ class GoalController {
       });
 
     } catch (error) {
-      console.error('Error fetching goals:', error);
+      logger.error('Error fetching goals:', error);
       res.status(500).json({
         status: "failed",
         message: "Unable to fetch goals, please try again later"
@@ -112,7 +113,7 @@ class GoalController {
       });
 
     } catch (error) {
-      console.error('Error fetching goal:', error);
+      logger.error('Error fetching goal:', error);
       res.status(500).json({
         status: "failed",
         message: "Unable to fetch goal, please try again later"
@@ -152,7 +153,7 @@ class GoalController {
       });
 
     } catch (error) {
-      console.error('Error updating goal:', error);
+      logger.error('Error updating goal:', error);
       res.status(500).json({
         status: "failed",
         message: "Unable to update goal, please try again later"
@@ -193,7 +194,7 @@ class GoalController {
       });
 
     } catch (error) {
-      console.error('Error deleting goal:', error);
+      logger.error('Error deleting goal:', error);
       res.status(500).json({
         status: "failed",
         message: "Unable to delete goal, please try again later"
@@ -229,7 +230,7 @@ class GoalController {
       });
 
     } catch (error) {
-      console.error('Error setting current goal:', error);
+      logger.error('Error setting current goal:', error);
       res.status(500).json({
         status: "failed",
         message: "Unable to set current goal, please try again later"
@@ -255,7 +256,7 @@ class GoalController {
       });
 
     } catch (error) {
-      console.error('Error fetching current goal:', error);
+      logger.error('Error fetching current goal:', error);
       res.status(500).json({
         status: "failed",
         message: "Unable to fetch current goal, please try again later"

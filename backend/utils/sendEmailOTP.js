@@ -1,4 +1,5 @@
 import transporter from "../config/emailConfig.js";
+import logger from '../../logger.js';
 import EmailVerificationModel from "../models/EmailVerification.js";
 const sendEmailVerificationOTP= async(req,user)=>{
     
@@ -30,7 +31,7 @@ const sendEmailVerificationOTP= async(req,user)=>{
 
     }
     catch(error){
-        console.error("Error sending email:", error.message);
+        logger.error("Error sending email:", error.message);
     }
 
     return otp
