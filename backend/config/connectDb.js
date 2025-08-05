@@ -1,13 +1,15 @@
 import mongoose from "mongoose";
+import logger from "../../logger.js";
+
 const connectDB =async (DATABASE_URL)=>{
     try{
         const DB_OPTIONS={
             dbName:"codestreak",
         }
         await mongoose.connect(DATABASE_URL,DB_OPTIONS);
-        console.log('Connected successfully...')
+        logger.info('Connected successfully...')
     }catch(error){
-        console.log(error)
+        logger.error('Error connecting to database:', error);
     }
 }
 

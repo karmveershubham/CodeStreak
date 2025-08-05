@@ -1,3 +1,4 @@
+import logger from '../../logger.js';
 // gemini.js
 import axios from 'axios';
 import dotenv from 'dotenv';
@@ -24,8 +25,8 @@ export async function askGemini(prompt) {
     const text = response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
     return text || 'No response from Gemini.';
   } catch (error) {
-    console.log(error.stack);
-    console.error('Error calling Gemini API:', error.message);
+    logger.error(error.stack);
+    logger.error('Error calling Gemini API:', error.message);
     return 'Error contacting Gemini API.';
   }
 }
@@ -36,7 +37,7 @@ export async function generateWeeklyPlan(goal, userPreferences) {
     const { PROMPTS } = await import('../../ai/prompts.js');
     const prompt = PROMPTS.generateWeeklyPlan(goal, userPreferences);
     const response = await askGemini(prompt);
-    console.log('AI response:', response);
+    logger.info('AI response:', response);
 
     // Remove markdown code block wrappers if present
     const cleanedResponse = response
@@ -44,18 +45,18 @@ export async function generateWeeklyPlan(goal, userPreferences) {
       .replace(/^```\s*/i, '')     // or plain ```
       .replace(/\s*```$/, '')      // remove ``` at the end
       .trim();
-    // console.log('Cleaned AI response:', cleanedResponse);
+    // logger.info('Cleaned AI response:', cleanedResponse);
     // Try to parse JSON response
     try {
       const plan = JSON.parse(cleanedResponse);
-      // console.log('Generated weekly plan:', plan);
+      // logger.info('Generated weekly plan:', plan);
       return plan;
     } catch (parseError) {
-      console.error('Failed to parse AI response as JSON:', parseError);
+      logger.error('Failed to parse AI response as JSON:', parseError);
       throw new Error('Invalid AI response format');
     }
   } catch (error) {
-    console.error('Error generating weekly plan:', error);
+    logger.error('Error generating weekly plan:', error);
     throw error;
   }
 }
@@ -78,11 +79,11 @@ export async function generateDailyQuestion(userProfile, completedTopics, streak
       const recommendation = JSON.parse(cleanedResponse);
       return recommendation;
     } catch (parseError) {
-      console.error('Failed to parse AI response as JSON:', parseError);
+      logger.error('Failed to parse AI response as JSON:', parseError);
       throw new Error('Invalid AI response format');
     }
   } catch (error) {
-    console.error('Error generating daily question:', error);
+    logger.error('Error generating daily question:', error);
     throw error;
   }
 }
@@ -97,11 +98,11 @@ export async function generateProgressFeedback(weeklyProgress, streak) {
       const feedback = JSON.parse(response);
       return feedback;
     } catch (parseError) {
-      console.error('Failed to parse AI response as JSON:', parseError);
+      logger.error('Failed to parse AI response as JSON:', parseError);
       throw new Error('Invalid AI response format');
     }
   } catch (error) {
-    console.error('Error generating progress feedback:', error);
+    logger.error('Error generating progress feedback:', error);
     throw error;
   }
 }

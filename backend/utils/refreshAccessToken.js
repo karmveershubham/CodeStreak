@@ -1,4 +1,5 @@
 import UserModel from "../models/User.js";
+import logger from '../../logger.js';
 import UserRefreshTokenModel from "../models/UserRefreshToken.js";
 import generateTokens from "./generateTokens.js";
 import verifyRefreshToken from "./verifyRefreshToken.js";
@@ -35,7 +36,7 @@ const refreshAccessToken = async (req, res) => {
     };
 
   } catch (error) {
-    console.error(error);
+    logger.error(error);
     res.status(500).send({ status: "failed", message: "Internal server error" });
   }
 }

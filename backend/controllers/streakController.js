@@ -1,3 +1,4 @@
+import logger from '../../logger.js';
 import StreakModel from '../models/Streak.js';
 import { generateDailyQuestion } from '../utils/gemini.js';
 
@@ -23,7 +24,7 @@ class StreakController {
       });
 
     } catch (error) {
-      console.error('Error fetching streak:', error);
+      logger.error('Error fetching streak:', error);
       res.status(500).json({
         status: "failed",
         message: "Unable to fetch streak, please try again later"
@@ -60,7 +61,7 @@ class StreakController {
       });
 
     } catch (error) {
-      console.error('Error updating streak:', error);
+      logger.error('Error updating streak:', error);
       res.status(500).json({
         status: "failed",
         message: "Unable to update streak, please try again later"
@@ -98,7 +99,7 @@ class StreakController {
       });
 
     } catch (error) {
-      console.error('Error fetching streak history:', error);
+      logger.error('Error fetching streak history:', error);
       res.status(500).json({
         status: "failed",
         message: "Unable to fetch streak history, please try again later"
@@ -152,7 +153,7 @@ class StreakController {
       });
 
     } catch (error) {
-      console.error('Error getting daily motivation:', error);
+      logger.error('Error getting daily motivation:', error);
       res.status(500).json({
         status: "failed",
         message: "Unable to get daily motivation, please try again later"
@@ -210,7 +211,7 @@ class StreakController {
       });
 
     } catch (error) {
-      console.error('Error fetching streak stats:', error);
+      logger.error('Error fetching streak stats:', error);
       res.status(500).json({
         status: "failed",
         message: "Unable to fetch streak statistics, please try again later"
@@ -247,7 +248,7 @@ class StreakController {
       });
 
     } catch (error) {
-      console.error('Error resetting streak:', error);
+      logger.error('Error resetting streak:', error);
       res.status(500).json({
         status: "failed",
         message: "Unable to reset streak, please try again later"

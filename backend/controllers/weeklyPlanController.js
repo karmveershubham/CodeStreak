@@ -1,3 +1,4 @@
+import logger from '../../logger.js';
 import WeeklyPlanModel from '../models/WeeklyPlan.js';
 import GoalModel from '../models/Goal.js';
 import UserModel from '../models/User.js';
@@ -72,7 +73,7 @@ class WeeklyPlanController {
       });
 
     } catch (error) {
-      console.error('Error generating weekly plan:', error);
+      logger.error('Error generating weekly plan:', error);
       res.status(500).json({
         status: "failed",
         message: "Unable to generate weekly plan, please try again later"
@@ -93,7 +94,7 @@ class WeeklyPlanController {
       });
 
     } catch (error) {
-      console.error('Error fetching weekly plans:', error);
+      logger.error('Error fetching weekly plans:', error);
       res.status(500).json({
         status: "failed",
         message: "Unable to fetch weekly plans, please try again later"
@@ -124,7 +125,7 @@ class WeeklyPlanController {
       });
 
     } catch (error) {
-      console.error('Error fetching weekly plan:', error);
+      logger.error('Error fetching weekly plan:', error);
       res.status(500).json({
         status: "failed",
         message: "Unable to fetch weekly plan, please try again later"
@@ -153,7 +154,7 @@ class WeeklyPlanController {
       });
 
     } catch (error) {
-      console.error('Error fetching current weekly plan:', error);
+      logger.error('Error fetching current weekly plan:', error);
       res.status(500).json({
         status: "failed",
         message: "Unable to fetch current weekly plan, please try again later"
@@ -211,7 +212,7 @@ class WeeklyPlanController {
       });
 
     } catch (error) {
-      console.error('Error marking question completed:', error);
+      logger.error('Error marking question completed:', error);
       res.status(500).json({
         status: "failed",
         message: "Unable to mark question as completed, please try again later"
@@ -262,7 +263,7 @@ class WeeklyPlanController {
       });
 
     } catch (error) {
-      console.error('Error marking day completed:', error);
+      logger.error('Error marking day completed:', error);
       res.status(500).json({
         status: "failed",
         message: "Unable to mark day as completed, please try again later"
@@ -296,7 +297,7 @@ class WeeklyPlanController {
       });
 
     } catch (error) {
-      console.error('Error deactivating weekly plan:', error);
+      logger.error('Error deactivating weekly plan:', error);
       res.status(500).json({
         status: "failed",
         message: "Unable to deactivate weekly plan, please try again later"
@@ -345,7 +346,7 @@ class WeeklyPlanController {
       });
 
     } catch (error) {
-      console.error('Error getting weekly feedback:', error);
+      logger.error('Error getting weekly feedback:', error);
       res.status(500).json({
         status: "failed",
         message: "Unable to get weekly feedback, please try again later"

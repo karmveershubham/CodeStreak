@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema({
     email: {type:String, required:true, trim:true, unique:true, lowercase:true},
     password: {type:String, required:true, trim:true},
     is_verified:{type:Boolean, default:false},
+    overallScore: { type: Number, default: 0 },
     roles: {type: [String], enum:["user", "admin"], default:["user"]},
     // New fields for goal-based learning
     currentGoal: {

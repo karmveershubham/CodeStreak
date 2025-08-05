@@ -1,3 +1,4 @@
+import logger from '../../logger.js';
 import isTokenExpired from "../utils/isTokenExpired.js";
 
 // This middleware will set Authorization Header
@@ -11,7 +12,7 @@ const setAuthHeader = async (req, res, next) => {
     }
     next()
   } catch (error) {
-    console.error('Error adding access token to header:', error.message);
+    logger.error('Error adding access token to header:', error.message);
   }
 }
 

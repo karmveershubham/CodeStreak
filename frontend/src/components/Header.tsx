@@ -1,3 +1,4 @@
+'use client'
 import React, { useState } from 'react';
 import { Moon, Sun, X, Menu } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -17,23 +18,43 @@ const Header: React.FC<HeaderProps> = ({ toggleDark, isDark }) => {
   };
 
   const handleNavClick = (sectionId: string) => {
-    if (sectionId === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        const headerHeight = 80; // Approximate header height
-        const elementPosition = element.offsetTop - headerHeight;
-        
-        window.scrollTo({
-          top: elementPosition,
-          behavior: 'smooth'
-        });
-      }
+    const isInternalRoute = sectionId.startsWith('/');
+    const isHomePage = window.location.pathname === '/';
+
+    if (isInternalRoute) {
+      // Go to full page like /leaderboard/1
+      router.push(sectionId);
+      return;
     }
-    // Close mobile menu when navigation item is clicked
+
+    if (!isHomePage) {
+      // Go to homepage, then scroll after small delay
+      router.push('/');
+
+      setTimeout(() => {
+        scrollToSection(sectionId);
+      }, 300);
+    } else {
+      // Already on homepage, just scroll
+      scrollToSection(sectionId);
+    }
+
     setIsMobileMenuOpen(false);
   };
+
+  const scrollToSection = (id: string) => {
+    if (id === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        const headerHeight = 80;
+        const offset = element.offsetTop - headerHeight;
+        window.scrollTo({ top: offset, behavior: 'smooth' });
+      }
+    }
+  };
+
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -51,19 +72,19 @@ const Header: React.FC<HeaderProps> = ({ toggleDark, isDark }) => {
           {/* Navigation */}
           <nav className="hidden lg:flex items-center">
             <div className="flex items-center gap-1 p-1 rounded-2xl bg-gray-100/50 dark:bg-slate-800/50">
-              {['Home', 'How It Works','Features','Preview', 'Leaderboard', 'Testimonial'].map((item) => {
+              {['Home', 'How It Works', 'Features', 'Preview', 'Leaderboard', 'Testimonial'].map((item) => {
                 const getSectionId = (itemName: string) => {
                   const sectionMap: Record<string, string> = {
                     'Home': 'home',
                     'How It Works': 'howitworks',
                     'Features': 'features',
                     'Preview': 'platforms',
-                    'Leaderboard': 'community',
+                    'Leaderboard': '/leaderboard/1',
                     'Testimonial': 'testimonials'
                   };
                   return sectionMap[itemName] || itemName.toLowerCase().replace(/\s+/g, '-');
                 };
-                
+
                 return (
                   <button
                     key={item}
@@ -81,7 +102,7 @@ const Header: React.FC<HeaderProps> = ({ toggleDark, isDark }) => {
           {/* Right Side Actions */}
           <div className="flex items-center gap-3">
             {/* Get Started Button - Mobile */}
-            <button 
+            <button
               onClick={handleGetStarted}
               className="lg:hidden p-3 rounded-2xl bg-gradient-to-r from-blue-500 via-purple-500 to-blue-600 text-white font-semibold text-xs transition-transform duration-300 transform hover:scale-110 shadow-lg">
               <span className="whitespace-nowrap">Get Started</span>
@@ -97,22 +118,22 @@ const Header: React.FC<HeaderProps> = ({ toggleDark, isDark }) => {
                 <Sun className="absolute inset-0 w-5 h-5 transition-all duration-300 ease-in-out dark:opacity-100 dark:rotate-0 dark:scale-100 opacity-0 -rotate-90 scale-0 text-yellow-500" />
                 <Moon className="absolute inset-0 w-5 h-5 transition-all duration-300 ease-in-out opacity-100 rotate-0 scale-100 dark:opacity-0 dark:rotate-90 dark:scale-0 text-blue-400" />
               </div>
-              
+
               <div className="absolute inset-0 rounded-2xl transition-shadow duration-300 group-hover:shadow-lg group-hover:shadow-blue-400/20 dark:group-hover:shadow-yellow-400/20"></div>
             </button>
 
             {/* Get Started Button - Desktop */}
-            <button 
+            <button
               onClick={handleGetStarted}
               className="group relative hidden lg:flex items-center gap-2 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-600 text-white px-4 py-2.5 rounded-2xl font-semibold text-sm transition-transform duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl overflow-hidden">
-              
+
               <span className="relative z-10">Get Started</span>
               <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 ease-in-out"></div>
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
 
             {/* Mobile Menu Button */}
-            <button 
+            <button
               onClick={toggleMobileMenu}
               className="lg:hidden p-3 rounded-2xl transition-transform ease-in-out duration-300 hover:scale-110 bg-gray-100/50 dark:bg-slate-800/50 text-gray-900 dark:text-white hover:bg-gray-200/50 dark:hover:bg-slate-700/50"
               aria-label="Toggle mobile menu"
@@ -134,19 +155,19 @@ const Header: React.FC<HeaderProps> = ({ toggleDark, isDark }) => {
         <div className="lg:hidden absolute top-full left-0 right-0 transition-opacity duration-300 border-t bg-white/95 dark:bg-slate-900/95 border-gray-200 dark:border-slate-800">
           <div className="max-w-7xl mx-auto px-6 py-4">
             <nav className="flex flex-col space-y-2">
-              {['Home', 'How It Works','Features','Preview', 'Leaderboard', 'Testimonial'].map((item) => {
+              {['Home', 'How It Works', 'Features', 'Preview', 'Leaderboard', 'Testimonial'].map((item) => {
                 const getSectionId = (itemName: string) => {
                   const sectionMap: Record<string, string> = {
                     'Home': 'home',
                     'How It Works': 'how-it-works',
                     'Features': 'features',
                     'Preview': 'platforms',
-                    'Leaderboard': 'community',
+                    'Leaderboard': '/leaderboard/1',
                     'Testimonial': 'testimonials'
                   };
                   return sectionMap[itemName] || itemName.toLowerCase().replace(/\s+/g, '-');
                 };
-                
+
                 return (
                   <button
                     key={item}
