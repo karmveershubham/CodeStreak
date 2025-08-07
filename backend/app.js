@@ -14,6 +14,9 @@ import passport from 'passport'
 import './config/passportJwt.js'
 import './config/googleStrategy.js'
 import setTokensCookies from './utils/setTokensCookies.js'
+import swaggerUi from 'swagger-ui-express';
+import swaggerSpec from './config/swagger.js';
+
 const app=express()
 const port=process.env.PORT 
 const DATABASE_URL=process.env.DATABASE_URL
@@ -45,6 +48,8 @@ app.use(passport.initialize())
 
 //Cookie Parser
 app.use(cookieParser())
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use('/api/user/', userRouter);
 app.use('/api/goals/', goalRouter);
