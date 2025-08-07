@@ -49,14 +49,7 @@ const Footer: React.FC<FooterProps> = ({ isDark, toggleDark }) => {
                     handleHomeClick();
                   } else if (link === 'How It Works') {
                     // Scroll to HowItWorks section - it doesn't have an ID, so we'll scroll to features and offset
-                    const featuresElement = document.getElementById('features');
-                    if (featuresElement) {
-                      const howItWorksOffset = featuresElement.offsetTop + featuresElement.offsetHeight;
-                      window.scrollTo({
-                        top: howItWorksOffset - 80,
-                        behavior: 'smooth'
-                      });
-                    }
+                    handleNavClick('howitworks');
                   } else if (link === 'Features') {
                     handleNavClick('features');
                   } else if (link === 'Preview') {
