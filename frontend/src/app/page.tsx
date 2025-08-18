@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
@@ -19,18 +19,20 @@ export default function HomePage() {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
+    // Check if "dark" class is applied
     const checkTheme = () => {
       setIsDark(document.documentElement.classList.contains('dark'));
     };
-    
+
     checkTheme();
-    
+
+    // Watch for changes in theme
     const observer = new MutationObserver(checkTheme);
     observer.observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ['class']
+      attributeFilter: ['class'],
     });
-    
+
     return () => observer.disconnect();
   }, []);
 
@@ -41,37 +43,64 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-transparent text-gray-900 dark:text-white overflow-x-hidden relative">
+      {/* Background */}
       <GalaxyBackground />
+
+      {/* Header */}
       <Header toggleDark={handleToggleTheme} isDark={isDark} />
-      
+
+      {/* Hero Section */}
       <AnimatedSection id="hero" variant="fadeInDown" className="relative z-10">
         <Hero isDark={isDark} />
       </AnimatedSection>
-      
+
+      {/* 🔥 Today's Challenge Section */}
+      <AnimatedSection id="today-challenge" variant="fadeInUp" className="relative z-10 mt-12">
+        <div className="max-w-3xl mx-auto p-6 rounded-2xl shadow-lg border border-indigo-400/50 bg-gradient-to-r from-indigo-50 to-indigo-100 dark:from-indigo-900/40 dark:to-indigo-800/30">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="px-3 py-1 text-xs font-bold text-white bg-indigo-600 rounded-full shadow-md">
+              TODAY
+            </span>
+            <h2 className="text-xl font-semibold">Today’s Challenge</h2>
+          </div>
+          <p className="text-gray-700 dark:text-gray-300">
+            🚀 Build a simple **Todo App** with add, delete, and toggle features.  
+            Keep it clean, responsive, and submit your solution before midnight!
+          </p>
+        </div>
+      </AnimatedSection>
+
+      {/* How It Works */}
       <AnimatedSection id="howitworks" variant="fadeInUp" className="relative z-10">
         <HowItWorks isDark={isDark} />
       </AnimatedSection>
-      
+
+      {/* Features */}
       <AnimatedSection id="features" variant="fadeInUp" className="relative z-10">
         <FeatureHighlights isDark={isDark} />
       </AnimatedSection>
-      
+
+      {/* Platforms */}
       <AnimatedSection id="platforms" variant="scaleIn" className="relative z-10">
         <PlatformPreviews isDark={isDark} />
       </AnimatedSection>
-      
+
+      {/* Community */}
       <AnimatedSection id="community" variant="fadeInLeft" className="relative z-10">
         <Community isDark={isDark} />
       </AnimatedSection>
-      
+
+      {/* Testimonials */}
       <AnimatedSection id="testimonials" variant="fadeInRight" className="relative z-10">
         <Testimonials isDark={isDark} />
       </AnimatedSection>
-      
+
+      {/* Call To Action */}
       <AnimatedSection id="cta" variant="slideInUp" className="relative z-10">
         <CTA isDark={isDark} />
       </AnimatedSection>
-      
+
+      {/* Footer */}
       <div className="relative z-10">
         <Footer toggleDark={handleToggleTheme} isDark={isDark} />
       </div>
