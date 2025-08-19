@@ -171,7 +171,7 @@ DATABASE_URL=mongodb+srv://username:password@cluster0.mongodb.net/codestreak
 EMAIL_HOST=smtp.gmail.com
 EMAIL_PORT=587
 EMAIL_USER=example@gmail.com
-EMAIL_PASS=your_email_app_password
+EMAIL_PASS=your_email_app_password//
 EMAIL_FROM="CodeStreak <no-reply@codestreak.com>"
 
 # JWT
