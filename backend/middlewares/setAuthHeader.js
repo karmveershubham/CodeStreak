@@ -1,4 +1,4 @@
-import logger from '../../logger.js';
+import logger from '../utils/logger.js';
 import isTokenExpired from "../utils/isTokenExpired.js";
 
 // This middleware will set Authorization Header

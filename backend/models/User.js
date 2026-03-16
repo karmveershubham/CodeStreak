@@ -7,6 +7,13 @@ const userSchema = new mongoose.Schema({
     is_verified:{type:Boolean, default:false},
     overallScore: { type: Number, default: 0 },
     roles: {type: [String], enum:["user", "admin"], default:["user"]},
+    
+    // GitHub Integration
+    githubUsername: { type: String, sparse: true, unique: true },
+    githubAccessToken: { type: String },
+    githubLastSync: { type: Date },
+    dailyCommitCount: { type: Number, default: 0 },
+
     // New fields for goal-based learning
     currentGoal: {
         type: mongoose.Schema.Types.ObjectId,

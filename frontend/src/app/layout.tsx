@@ -19,7 +19,7 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `
+             __html: `
               (function() {
                 try {
                   var theme = localStorage.getItem('theme');

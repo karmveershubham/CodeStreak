@@ -16,5 +16,7 @@ router.post('/reset-password/:id/:token', UserController.userPasswordReset)
 router.get('/me', accessTokenAutoRefresh, passport.authenticate('jwt', { session: false }), UserController.userProfile)
 router.post('/change-password', accessTokenAutoRefresh, passport.authenticate('jwt', { session: false }), UserController.changeUserPassword)
 router.post('/logout', accessTokenAutoRefresh, passport.authenticate('jwt', { session: false }), UserController.userLogout)
+router.post('/github/connect', accessTokenAutoRefresh, passport.authenticate('jwt', { session: false }), UserController.connectGitHub)
+router.post('/github/sync', accessTokenAutoRefresh, passport.authenticate('jwt', { session: false }), UserController.syncGitHub)
 
 export default router;

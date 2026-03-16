@@ -23,7 +23,7 @@ export default function Login() {
 
       if (!res.ok) throw new Error("Login failed");
 
-      router.push("/dashboard");
+      router.push("/profile");
     } catch (err: any) {
       console.error(err.message);
       alert("Invalid credentials. Please try again.");

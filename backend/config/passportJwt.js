@@ -1,4 +1,4 @@
-import logger from '../../logger.js';
+import logger from '../utils/logger.js';
 import UserModel from '../models/User.js'
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 import passport from 'passport';

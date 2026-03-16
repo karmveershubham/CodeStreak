@@ -1,4 +1,4 @@
-import logger from '../logger.js';
+import logger from './utils/logger.js';
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -18,6 +18,7 @@ import './config/githubStrategy.js';        // added github Strategy
 import setTokensCookies from './utils/setTokensCookies.js';
 import swaggerUi from 'swagger-ui-express';
 import swaggerSpec from './config/swagger.js';
+import syncGitHubActivity from './cron/githubSync.js';
 
 const app = express();
 const port = process.env.PORT;
@@ -122,6 +123,15 @@ app.get('/auth/github/callback',
 //   }
 // );
 
+// Global error handling middleware
+app.use((err, req, res, next) => {
+  logger.error(err.stack);
+  res.status(500).json({ error: 'Something went wrong on the server!' });
+});
+
 app.listen(port, () => {
   logger.info(`Server listening at http://localhost:${port}`);
+  
+  // Initialize cron jobs
+  syncGitHubActivity(); 
 });

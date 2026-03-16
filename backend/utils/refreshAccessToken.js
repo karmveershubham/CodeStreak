@@ -1,5 +1,5 @@
 import UserModel from "../models/User.js";
-import logger from '../../logger.js';
+import logger from './logger.js';
 import UserRefreshTokenModel from "../models/UserRefreshToken.js";
 import generateTokens from "./generateTokens.js";
 import verifyRefreshToken from "./verifyRefreshToken.js";

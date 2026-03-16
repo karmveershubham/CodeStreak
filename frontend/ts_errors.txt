@@ -1,0 +1,3 @@
+.next/types/app/api/auth/[...nextauth]/route.ts(12,13): error TS2344: Type 'OmitWithTag<typeof import("C:/Users/asifs/OneDrive/Desktop/CodeStreak/frontend/src/app/api/auth/[...nextauth]/route"), "config" | "POST" | "generateStaticParams" | "revalidate" | "dynamic" | ... 10 more ... | "PATCH", "">' does not satisfy the constraint '{ [x: string]: never; }'.
+  Property 'authOptions' is incompatible with index signature.
+    Type '{ providers: OAuthConfig<GithubProfile>[]; callbacks: { jwt({ token, account, profile }: any): Promise<any>; session({ session, token }: any): Promise<any>; }; session: { ...; }; pages: { ...; }; }' is not assignable to type 'never'.

@@ -1,4 +1,4 @@
-import logger from '../../logger.js';
+import logger from '../utils/logger.js';
 import GoalModel from '../models/Goal.js';
 import UserModel from '../models/User.js';
 import { generateWeeklyPlan } from '../utils/gemini.js';

@@ -1,4 +1,4 @@
-import logger from '../../logger.js';
+import logger from '../utils/logger.js';
 import UserModel from '../models/User.js'
 import bcrypt from 'bcrypt'
 import EmailVerificationModel from '../models/EmailVerification.js';
@@ -9,6 +9,7 @@ import refreshAccessToken from '../utils/refreshAccessToken.js';
 import UserRefreshTokenModel from '../models/UserRefreshToken.js';
 import jwt from 'jsonwebtoken';
 import transporter from '../config/emailConfig.js';
+import githubService from '../services/github.service.js';
 
 class UserController {
 
@@ -359,6 +360,56 @@ class UserController {
       res.status(500).json({ status: "failed", message: "Unable to logout, please try again later" });
     }
   }
+
+  // --- GitHub Integration ---
+  
+  static connectGitHub = async (req, res) => {
+    try {
+      const { githubUsername, githubAccessToken } = req.body;
+      
+      if (!githubUsername) {
+        return res.status(400).json({ status: "failed", message: "GitHub username is required" });
+      }
+
+      const user = await UserModel.findById(req.user._id);
+      user.githubUsername = githubUsername;
+      if (githubAccessToken) {
+        user.githubAccessToken = githubAccessToken;
+      }
+      
+      await user.save();
+      
+      // Perform an initial sync upon connecting
+      await githubService.syncUserActivity(user);
+      
+      res.status(200).json({ status: "success", message: "GitHub account connected successfully" });
+    } catch (error) {
+      logger.error('Error connecting GitHub account:', error);
+      res.status(500).json({ status: "failed", message: "Unable to connect GitHub account. It may already be linked to another user." });
+    }
+  }
+
+  static syncGitHub = async (req, res) => {
+    try {
+      const user = await UserModel.findById(req.user._id);
+      
+      if (!user.githubUsername) {
+        return res.status(400).json({ status: "failed", message: "No GitHub account connected" });
+      }
+
+      await githubService.syncUserActivity(user);
+      
+      res.status(200).json({ 
+        status: "success", 
+        message: "GitHub activity synced",
+        dailyCommitCount: user.dailyCommitCount
+      });
+    } catch (error) {
+      logger.error('Error syncing GitHub activity:', error);
+      res.status(500).json({ status: "failed", message: "Unable to sync GitHub activity" });
+    }
+  }
+
 }
 
 export default UserController;

@@ -1,4 +1,4 @@
-import logger from '../../logger.js';
+import logger from './logger.js';
 // gemini.js
 import axios from 'axios';
 import dotenv from 'dotenv';

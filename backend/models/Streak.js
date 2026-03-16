@@ -31,6 +31,10 @@ const streakSchema = new mongoose.Schema({
       type: Number, // in minutes
       default: 0
     },
+    githubCommits: {
+      type: Number,
+      default: 0
+    },
     topics: [{
       type: String,
       trim: true
@@ -61,7 +65,7 @@ streakSchema.pre('save', function(next) {
 });
 
 // Method to update streak
-streakSchema.methods.updateStreak = function(questionsCompleted = 0, studyTime = 0, topics = []) {
+streakSchema.methods.updateStreak = function(questionsCompleted = 0, studyTime = 0, topics = [], githubCommits = 0) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   
@@ -81,17 +85,24 @@ streakSchema.methods.updateStreak = function(questionsCompleted = 0, studyTime =
     // Update today's entry
     todayEntry.questionsCompleted += questionsCompleted;
     todayEntry.studyTime += studyTime;
-    todayEntry.topics = [...new Set([...todayEntry.topics, ...topics])];
+    todayEntry.githubCommits += githubCommits;
+    if (topics.length > 0) {
+      todayEntry.topics = [...new Set([...todayEntry.topics, ...topics])];
+    }
   } else {
     // Add new entry for today
     this.streakHistory.push({
       date: today,
       questionsCompleted,
       studyTime,
+      githubCommits,
       topics
     });
     
     // Update streak count
+    // The streak extends if questionsCompleted > 0 OR studyTime > 0 OR githubCommits > 0
+    // But since this method only gets called when activity actually happens, 
+    // simply reaching here implies activity for today.
     if (!lastActivity || (today.getTime() - lastActivity.getTime()) === 86400000) {
       // Consecutive day
       this.currentStreak += 1;

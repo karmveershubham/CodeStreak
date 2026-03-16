@@ -1,5 +1,5 @@
 import transporter from "../config/emailConfig.js";
-import logger from '../../logger.js';
+import logger from './logger.js';
 import EmailVerificationModel from "../models/EmailVerification.js";
 const sendEmailVerificationOTP= async(req,user)=>{
     

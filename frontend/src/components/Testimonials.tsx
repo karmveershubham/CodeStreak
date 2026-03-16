@@ -60,8 +60,8 @@ const Testimonials: React.FC<TestimonialsProps> = ({ isDark }) => {
               isDark ? 'border-l-purple-400 border-r-purple-400 border-b-purple-400' : 'border-l-purple-500 border-r-purple-500 border-b-purple-500'
             }`}
             style={{
-              left: `${Math.random() * 90 + 5}%`,
-              top: `${Math.random() * 80 + 10}%`,
+              left: `${((i * 23 + 17) % 90) + 5}%`,
+              top: `${((i * 31 + 11) % 80) + 10}%`,
               borderLeftWidth: '8px',
               borderRightWidth: '8px',
               borderBottomWidth: '14px',
@@ -80,8 +80,8 @@ const Testimonials: React.FC<TestimonialsProps> = ({ isDark }) => {
               isDark ? 'border-blue-400' : 'border-blue-500'
             }`}
             style={{
-              left: `${Math.random() * 85 + 7.5}%`,
-              top: `${Math.random() * 75 + 12.5}%`,
+              left: `${((i * 29 + 13) % 85) + 7.5}%`,
+              top: `${((i * 37 + 19) % 75) + 12.5}%`,
               animationDelay: `${i * 3}s`,
               animationDuration: '6s'
             }}
